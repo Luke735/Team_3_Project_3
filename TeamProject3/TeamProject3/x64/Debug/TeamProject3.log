@@ -1,0 +1,3 @@
+﻿  morseCodeSource.cpp
+C:\Users\smash\source\repos\TeamProject3\TeamProject3\morseCodeSource.cpp(151): warning C4715: 'decode_node': not all control paths return a value
+  TeamProject3.vcxproj -> C:\Users\smash\source\repos\TeamProject3\x64\Debug\TeamProject3.exe
