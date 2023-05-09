@@ -180,7 +180,6 @@ int main() {
         Tree_Node* head = new Tree_Node(' ');
         string line;
         while (getline(fin, line)) { //Gets each line from the input file
-            cout << line << endl;
             treeBuilder(line, head);
         }
 
