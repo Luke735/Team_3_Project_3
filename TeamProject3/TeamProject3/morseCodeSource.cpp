@@ -209,8 +209,8 @@ int main() {
             if (option.at(0) == 'd') {
                 cout << "Text here: " << endl;
                 string morse;
-                cin.ignore(256, '\n');
-                getline(cin, morse, '\n'); // might need to find a better way to do this later.
+                cin.ignore();
+                getline(cin, morse, '\n');
                 decode(morse, head);
             }
         }
