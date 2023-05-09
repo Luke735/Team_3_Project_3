@@ -13,8 +13,7 @@ struct Tree_Node {
     Tree_Node(int val, Tree_Node* left = NULL, Tree_Node* right = NULL) :
         val(val), left(left), right(right) {}
 };
-
-Tree_Node* treehead; // fix this, currently this is a global and should become a private data member.
+Tree_Node* treehead;
 
 /** Takes one letter of morse code and inserts the ascii value of the letter it represents into a binary tree.
     @param line: string of morse code
@@ -73,51 +72,52 @@ void treeBuilder(string line, Tree_Node* head) {
     @param str: string of lowercase letters
     @return: morse code string of a string of lowercase letters (no spaces)
 */
-string findchar(char target, Tree_Node* root){
-  string returnstr;
-  string tempstr = "";
-  char node = root->val;
-  
-  if(root == NULL){return "error";}
-  if(target == node){
-    return (" ");
-  }
-  else{
-    if(root->left != NULL){
-      tempstr = findchar(target, root->left);
-      if(tempstr != ""){
-        returnstr = ".";
-        returnstr.append(tempstr);
-        return (returnstr);
-      }
+string findchar(char target, Tree_Node* root) {
+    string returnstr;
+    string tempstr = "";
+    char node = root->val;
+
+    if (root == NULL) { return "error"; }
+    if (target == node) {
+        return (" ");
     }
-    if(root->right != NULL){
-      tempstr = findchar(target,root->right);
-      if(tempstr != ""){
-        returnstr = "-";
-        returnstr.append(tempstr);
-        return (returnstr);
-      }
+    else {
+        if (root->left != NULL) {
+            tempstr = findchar(target, root->left);
+            if (tempstr != "") {
+                returnstr = ".";
+                returnstr.append(tempstr);
+                return (returnstr);
+            }
+        }
+        if (root->right != NULL) {
+            tempstr = findchar(target, root->right);
+            if (tempstr != "") {
+                returnstr = "-";
+                returnstr.append(tempstr);
+                return (returnstr);
+            }
+        }
+        return ("");
     }
-    return ("");
-  }
 }
 
 string encode(string& str, Tree_Node* root) {
-  int i = 0;
-  string returnstr = "";
-  while(i <= str.size()){
-    if(str[i] == ' '){
+    int i = 0;
+    string returnstr = "";
+    while (i <= str.size()) {
+        if (str[i] == ' ') {
+        }
+        else {
+            returnstr.append(findchar(str[i], root));
+            if (i == str.size() - 1) {
+                return (returnstr);
+            }
+        }
+        i++;
     }
-    else{
-      returnstr.append(findchar(str[i],root));
-      if(i == str.size()-1){
-        return (returnstr);
-      }
-    }
-    i++;
-  }
-  return (returnstr);
+    return (returnstr);
+}
 
 /** Encodes a string of lowercase letters into morse code.
     @param str: string of lowercase letters
@@ -198,12 +198,12 @@ int main() {
             cout << "Choose an option: ";
             cin >> option;
 
-           //Encode a string of lowercase letters with no spaces
+            //Encode a string of lowercase letters with no spaces
             if (option.at(0) == 'e') {
                 cout << "Text here: ";
-                cin>>userinput;
+                cin >> userinput;
                 output = encode(userinput, head);
-                cout<<output<<endl;
+                cout << output << endl;
             }
 
             //Decode morse code with spaces as delimiters
@@ -216,6 +216,5 @@ int main() {
             }
         }
     }//end else
-   return 0;
+    return 0;
 }//end main
-
