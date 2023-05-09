@@ -13,7 +13,6 @@ struct Tree_Node {
     Tree_Node(int val, Tree_Node* left = NULL, Tree_Node* right = NULL) :
         val(val), left(left), right(right) {}
 };
-Tree_Node* treehead;
 
 /** Takes one letter of morse code and inserts the ascii value of the letter it represents into a binary tree.
     @param line: string of morse code
@@ -65,7 +64,7 @@ Tree_Node* treeBuilder(string line, int pos, Tree_Node* root) {
 }//end treeBuilder
 
 void treeBuilder(string line, Tree_Node* head) {
-    treehead = treeBuilder(line, 0, head); // currently treehead is global, FIX THIS LATER
+    treeBuilder(line, 0, head);
 }//end treeBuilder
 
 /** Encodes a string of lowercase letters into morse code.
@@ -151,14 +150,15 @@ int decode_node(Tree_Node* node, string& value) {
 
 /** Decodes morse code into a string of lowercase letters.
     @param str: string of morse code delimited with spaces
+    @param head: the head of the morse code binary tree
     @return: string of lowercase letters
 */
-string& decode(string& str) {
+string& decode(string& str, Tree_Node* head) {
     istringstream iss(str);
     ostringstream oss;
     string token;
     while (iss >> token) {
-        decode_node(treehead, token); // need to fix treehead later, this is currently a global.
+        decode_node(head, token);
     }
     cout << "" << endl;
     return str;
@@ -211,7 +211,7 @@ int main() {
                 string morse;
                 cin.ignore(256, '\n');
                 getline(cin, morse, '\n'); // might need to find a better way to do this later.
-                decode(morse);
+                decode(morse, head);
             }
         }
     }//end else
